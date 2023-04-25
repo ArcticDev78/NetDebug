@@ -33,7 +33,8 @@ gateway = gateway.replace("\n", "")
 up_interface = os.popen("route | awk '/Iface/{getline; print $8}'").read()
 up_interface = up_interface.replace("\n", "")
 
-# n_name = os.popen('iwgetid -r').read()  # Get wireless network name
+# Get wireless network name - worked on Ubuntu based Linux Distros
+# n_name = os.popen('iwgetid -r').read()
 
 # Work-around to get it working on Fedora Linux
 n_name = os.popen('nmcli -t -f NAME connection show --active').read()
@@ -42,10 +43,8 @@ n_name = os.popen('nmcli -t -f NAME connection show --active').read()
 n_mac = os.popen(
     "ip addr | grep 'state UP' -A1 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'").read()  # noqa
 
-# Local IP address
+# Get local IP address
 n_ip = os.popen("hostname -I").read()
-# Hostname
-# n_host = os.popen("hostname").read()
 
 # Print network configuration header
 print(""" \033[1;36m
@@ -53,7 +52,7 @@ print(""" \033[1;36m
 │                         Your Network Configuration                      │
 ╘═════════════════════════════════════════════════════════════════════════╛     \033[1;m""")  # noqa
 
-# Print network configuration , using tabulate as table.
+# Print network configuration, using tabulate as table.
 table = [["IP Address", "MAC Address", "Gateway", "Iface", "SSID"],
          # ["", "", "", "", ""],
          [n_ip, n_mac.upper(), gateway, up_interface, n_name]]
@@ -70,9 +69,11 @@ print()
 def exit():
     sys.exit(success_message('Shutting down NetDebug ... Bye! ( ^_^)/'))
 
+
+""" FONT STYLES """
+
+
 # Error message font style
-
-
 def error_message(error_msg, solution=None):
     if solution:
         print(f'[{red("!", "bold")}] {error_msg} {green(solution, "bold")}')  # noqa
