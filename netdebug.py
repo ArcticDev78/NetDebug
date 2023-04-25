@@ -572,20 +572,21 @@ def prompt():
 
     args = prompt_input.split()
     argsLength = len(args)
+    command = args[0]
 
     if argsLength == 0:
         # error_message('Please enter a valid command.')
         prompt()
     else:
-        if args[0] == 'dns-check':
+        if command == 'dns-check':
             print()
             dns_check()
 
-        elif args[0] == 'router-check':
+        elif command == 'router-check':
             print()
             router_check()
 
-        elif args[0] == 'show':
+        elif command == 'show':
             try:
                 if args[1] == 'ip' or args[1] == '1':
                     print()
@@ -611,25 +612,25 @@ def prompt():
                 print()
                 show_all()
 
-        elif args[0] == 'speedtest':
+        elif command == 'speedtest':
             print()
             speedtest()
 
-        elif args[0] == 'ping':
+        elif command == 'ping':
             print()
             ping()
 
-        elif args[0] == 'assistant':
+        elif command == 'assistant':
             print()
             assistant()
 
-        elif args[0] == 'exit':
+        elif command == 'exit':
             exit()
 
-        elif args[0] == 'clear':
+        elif command == 'clear':
             os.system('clear')
             prompt()
-        elif args[0] == 'help':
+        elif command == 'help':
             print()
             print(f'{cyan("Commands", ["bold", "underlined"])}:')
             print(f'  {yellow("help", "bold")}            |  {green("Print this help message", "italic")}')  # noqa
@@ -646,7 +647,7 @@ def prompt():
 
         else:
             error_message(
-                f'Invalid command: "{args[0]}". Please enter a valid command.')
+                f'Invalid command: "{command}". Please enter a valid command.')
             prompt()
 
 
