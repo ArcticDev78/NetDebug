@@ -23,9 +23,7 @@ Available commands / modules:
 Install required `pip` packages:
 
 ```
-pip install simple-colors
-
-pip install tabulate
+pip install simple-colors tabulate
 ```
 
 ### How to get started:
